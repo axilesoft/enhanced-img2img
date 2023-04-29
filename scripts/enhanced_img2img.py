@@ -506,6 +506,7 @@ class Script(scripts.Script):
 
             if use_csv or use_txt:
                 p.prompt = init_prompt + prompt_list[frame]
+                print(f'TXT Init: {init_prompt}\nTXT {frame}:{prompt_list[frame]}')
 
             state.job = f'{idx} out of {img_len}: {batch_images[0][1]}'
             if self.is_img2img:
