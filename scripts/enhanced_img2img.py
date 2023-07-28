@@ -57,7 +57,7 @@ class Script(scripts.Script):
             input_dir = gr.Textbox(label='Input directory', lines=1)
             use_mask = gr.Checkbox(
                 label='Use input image\'s alpha channel as mask', visible=self.is_img2img)
-
+        
         output_dir = gr.Textbox(label='Output directory', lines=1)
         
         with gr.Row():
@@ -255,7 +255,9 @@ class Script(scripts.Script):
             use_cn_inpaint,
             cn_inpaint_num,
             *cn_dirs):
-        
+        if (input_dir==''): input_dir='r:/img01'
+        if (output_dir==''): output_dir='r:/img'
+    
         mask_flag = self.is_img2img or (use_cn_inpaint and not self.is_img2img)
 
         # crop_util = module_from_file(
@@ -287,6 +289,7 @@ class Script(scripts.Script):
                 ', ') + ', ' if not init_prompt.rstrip().endswith(',') else init_prompt.rstrip() + ' '
 
         initial_info = None
+
         if given_file:
             if specified_filename == '':
                 images = [os.path.join(
